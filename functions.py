@@ -162,14 +162,16 @@ def validation(model, device, train_loader, test_loader):
     for image, mat, label in train_loader:
         # distribute data to device
         image, mat = image.to(device), mat.to(device)
-        hidden, output = model(image, mat)
+        with torch.no_grad():
+            hidden, output = model(image, mat)
         gallery_feat.append(hidden)
         gallery_label.append(label)
 
     for image, mat, label in test_loader:
         # distribute data to device
         image, mat = image.to(device), mat.to(device)
-        hidden, output = model(image, mat)
+        with torch.no_grad():
+            hidden, output = model(image, mat)
         prob_feat.append(hidden)
         prob_label.append(label)
 

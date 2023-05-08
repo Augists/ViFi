@@ -48,7 +48,7 @@ if __name__ == '__main__':
     parser.add_argument('--RNN_hidden_layers', type=int, default=1)  #
     parser.add_argument('--RNN_hidden_nodes', type=int, default=64)
     parser.add_argument('--RNN_FC_dim', type=int, default=64)
-    parser.add_argument('--k', type=int, default=12)
+    parser.add_argument('--k', type=int, default=8)
     parser.add_argument('--epochs', type=int, default=30)  # 改
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--learning_rate', type=float, default=0.001)
