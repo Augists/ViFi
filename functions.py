@@ -12,6 +12,7 @@ from tqdm import tqdm
 import scipy.io as scio
 from time import time
 
+
 def labels2cat(label_encoder, list):
     return label_encoder.transform(list)
 
@@ -165,6 +166,7 @@ def validation(model, device, train_loader, test_loader):
         with torch.no_grad():
             hidden, output = model(image, mat)
         gallery_feat.append(hidden)
+        # gallery_feat.append(output)
         gallery_label.append(label)
 
     for image, mat, label in test_loader:
@@ -173,6 +175,7 @@ def validation(model, device, train_loader, test_loader):
         with torch.no_grad():
             hidden, output = model(image, mat)
         prob_feat.append(hidden)
+        # prob_feat.append(output)
         prob_label.append(label)
 
     # return correct, total
@@ -185,8 +188,26 @@ def acc_calculate(gallery_feat, gallery_label, prob_feat, prob_label):
     prob_feat = prob_feat
     prob_label = prob_label.detach().cpu().numpy()
     m, n = prob_feat.shape[0], gallery_feat.shape[0]
+    # print(gallery_feat)
+    # print(prob_feat)
+    # print(gallery_feat.shape)
+    # print(prob_feat.shape)
+    # print(m)
+    # print(n)
+    # print("=================")
+    # print(prob_feat)
+    # print(torch.pow(prob_feat, 2))
+    # print(torch.pow(prob_feat, 2).sum(dim=1, keepdim=True).shape)
+    # print(torch.pow(gallery_feat, 2).sum(dim=1, keepdim=True).shape)
+    # print(torch.pow(prob_feat, 2).sum(dim=1, keepdim=True).expand(m, n))
+    # print(torch.pow(prob_feat, 2).sum(dim=1, keepdim=True).expand(m, n).shape)
+    # print("==========")
+    # print(torch.pow(gallery_feat, 2).sum(dim=1, keepdim=True).expand(n, m).t())
+    # print(torch.pow(gallery_feat, 2).sum(dim=1, keepdim=True).expand(n, m).t().shape)
     dist = torch.pow(prob_feat, 2).sum(dim=1, keepdim=True).expand(m, n) + \
            torch.pow(gallery_feat, 2).sum(dim=1, keepdim=True).expand(n, m).t()
+    # print(dist)
+    # print(dist.shape)
     dist.addmm_(1, -2, prob_feat, gallery_feat.t())
     dist = dist.cpu().detach().numpy()
     index = dist.argmin(axis=1)

@@ -59,7 +59,10 @@ same as dataset_divider.py
 """""""""
 # working = f'occlusion/board'
 # working: str = f'occlusion/cabinet'
-working: str = f'occlusion/desk'
+# working: str = f'occlusion/desk'
+# working: str = f'light/10'
+# working: str = f'light/100'
+working: str = f'light/dark'
 
 
 def preprocess(TEST=True):
@@ -90,12 +93,23 @@ def preprocess(TEST=True):
             pre_path = label_path / person
             if not os.path.exists(pre_path):
                 os.mkdir(pre_path)
+
+            # if no person detected, create a symbolic link from crop to Video
+            if not os.path.exists(opt.project / 'exp/crops'):
+                for jpg in os.listdir(opt.source):
+                    file_path = opt.source / jpg
+                    save_path = pre_path / jpg
+                    img = Image.open(file_path)
+                    img.resize((IMAGE_SQUARE_SIZE, IMAGE_SQUARE_SIZE))
+                    img.save(save_path)
+                continue
+
             for name in os.listdir(opt.project / 'exp/crops'):
                 file_path = opt.project / 'exp/crops' / name
                 save_path = pre_path / name
-                im = Image.open(file_path)
-                im.resize((IMAGE_SQUARE_SIZE, IMAGE_SQUARE_SIZE))
-                im.save(save_path)
+                img = Image.open(file_path)
+                img.resize((IMAGE_SQUARE_SIZE, IMAGE_SQUARE_SIZE))
+                img.save(save_path)
 
     # global image_padding_height, image_padding_width
     # image_padding_width = max_width if max_width > image_padding_width else image_padding_width

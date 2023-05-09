@@ -41,6 +41,8 @@ def check_empty_dirs(path):
 # working: str = f'occlusion/board'
 # working: str = f'occlusion/cabinet'
 # working: str = f'occlusion/desk'
+# working: str = f'light/10'
+# working: str = f'light/100'
 working: str = f'light/dark'
 
 

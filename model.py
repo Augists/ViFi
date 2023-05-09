@@ -53,14 +53,16 @@ class CRNN(nn.Module):
             self.image_RNN = RNN(CNN_embed_dim, h_RNN_layers, h_RNN, h_FC_dim, drop_p, num_classes)  # h_RNN, h_FC_dim
 
             # c3d
-            self.C3D1 = C3D()
+            # self.C3D1 = C3D()
 
         if input_type == 'mat' or input_type == 'both':
             # self.mat_CNN = CNN(mat_x, mat_y, 3, fc_hidden1, fc_hidden2, drop_p, CNN_embed_dim, input_type='mat',
             #                    fc_in_dim=256)  # 改
             self.mat_csi = CSIModel(500, CNN_embed_dim)
 
+        # self.fc = nn.Linear(h_FC_dim if input_type == 'both' else h_FC_dim, num_classes)
         self.fc = nn.Linear(2 * h_FC_dim if input_type == 'both' else h_FC_dim, num_classes)
+
 
     def forward(self, image, mat):
         if self.input_type == 'image' or self.input_type == 'both':
@@ -75,13 +77,17 @@ class CRNN(nn.Module):
         if self.input_type == 'both':
             # concatenate rnn_emb with mat
             hidden = torch.cat((rnn_emb, mat_emb), dim=1)
-            # hidden = rnn_emb + mat_emb
+            # print(rnn_emb.shape)
+            # print(mat_emb.shape)
+            # hidden = rnn_emb * 0.7 + mat_emb * 0.3
+            # print(hidden.shape)
         elif self.input_type == 'image':
             hidden = rnn_emb
             # hidden = x
         elif self.input_type == 'mat':
             hidden = mat_emb
         output = self.fc(hidden)
+        # print(np.shape(hidden))
         return hidden, output
 
 

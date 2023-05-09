@@ -18,7 +18,15 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
+def check_path(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
 if __name__ == '__main__':
+    check_path('./best_models')
+    check_path('./save_models')
+    check_path('./outputs')
+
     # set parameters
     parser = argparse.ArgumentParser()
     # parser.add_argument('--train_image_path', type=str, default='./datasets/Train/image')  # 路径
@@ -33,10 +41,10 @@ if __name__ == '__main__':
 
     # occlusion / board
     # light / dark
-    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/board/train/crop')  # 路径
-    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/board/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/board/test/crop')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/board/test/Mat')
+    parser.add_argument('--train_image_path', type=str, default='./datasets/light/100/train/Video')  # 路径
+    parser.add_argument('--train_mat_path', type=str, default='./datasets/light/100/train/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/light/100/test/Video')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/light/100/test/Mat')
 
     parser.add_argument('--save_model_path', type=str, default='./save_models/')
     parser.add_argument('--CNN_fc_hidden1', type=int, default=64)  # ?
