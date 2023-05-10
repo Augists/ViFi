@@ -77,9 +77,10 @@ class CRNN(nn.Module):
         if self.input_type == 'both':
             # concatenate rnn_emb with mat
             hidden = torch.cat((rnn_emb, mat_emb), dim=1)
+            # hidden = rnn_emb + mat_emb
+            # hidden = rnn_emb * 0.9 + mat_emb * 0.1
             # print(rnn_emb.shape)
             # print(mat_emb.shape)
-            # hidden = rnn_emb * 0.7 + mat_emb * 0.3
             # print(hidden.shape)
         elif self.input_type == 'image':
             hidden = rnn_emb

@@ -27,14 +27,14 @@ if __name__ == '__main__':
     # parser.add_argument('--test_image_path', type=str, default='./datasets/crop/video_test')  # 路径
     # parser.add_argument('--test_mat_path', type=str, default='./10/Mat_test')
 
-    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/desk/train/crop')  # 路径
-    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/desk/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
+    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/board/train/crop')  # 路径
+    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/board/train/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/board/test/crop')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/board/test/Mat')
 
     parser.add_argument('--img_x', type=int, default=64)
     parser.add_argument('--img_y', type=int, default=64)
-    parser.add_argument('--k', type=int, default=12)
+    parser.add_argument('--k', type=int, default=8)
     parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--n_frames', type=int, default=32)
     parser.add_argument('--num_workers', type=int, default=0)

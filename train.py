@@ -29,22 +29,17 @@ if __name__ == '__main__':
 
     # set parameters
     parser = argparse.ArgumentParser()
-    # parser.add_argument('--train_image_path', type=str, default='./datasets/Train/image')  # 路径
-    # parser.add_argument('--train_mat_path', type=str, default='./datasets/Train/mat')
-    # parser.add_argument('--test_image_path', type=str, default='./datasets/Test/image')
-    # parser.add_argument('--test_mat_path', type=str, default='./datasets/Test/mat')
-
-    # parser.add_argument('--train_image_path', type=str, default='./datasets/10/Video')  # 路径
-    # parser.add_argument('--train_mat_path', type=str, default='./datasets/10/Mat')
-    # parser.add_argument('--test_image_path', type=str, default='./datasets/10/Video_test')  # 路径
-    # parser.add_argument('--test_mat_path', type=str, default='./datasets/10/Mat_test')
 
     # occlusion / board
     # light / dark
-    parser.add_argument('--train_image_path', type=str, default='./datasets/light/100/train/Video')  # 路径
-    parser.add_argument('--train_mat_path', type=str, default='./datasets/light/100/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/light/100/test/Video')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/light/100/test/Mat')
+    # parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/desk/train/crop')  # 路径
+    # parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/desk/train/Mat')
+    # parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
+    # parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
+    parser.add_argument('--train_image_path', type=str, default='./datasets/collect/crop')  # 路径
+    parser.add_argument('--train_mat_path', type=str, default='./datasets/collect/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
 
     parser.add_argument('--save_model_path', type=str, default='./save_models/')
     parser.add_argument('--CNN_fc_hidden1', type=int, default=64)  # ?
@@ -132,6 +127,7 @@ if __name__ == '__main__':
                  args.RNN_hidden_nodes, args.RNN_FC_dim, args.dropout_p, args.k, args.input_type).to(device)
 
     print(model)
+    # model = torch.load(args.load_model_path, map_location=device)
 
     metric_loss = TripletLoss(margin=0.3)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)

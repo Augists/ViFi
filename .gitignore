@@ -4,3 +4,5 @@ best_models
 outputs
 save_models
 __pycache__
+
+~$result.xlsx
