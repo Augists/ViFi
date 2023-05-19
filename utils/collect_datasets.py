@@ -9,7 +9,7 @@ def check_path(path):
 
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # current directory
+ROOT = FILE.parents[0] / '..'  # current directory
 DATASETS = ROOT / 'datasets'
 SAVE = DATASETS / 'collect'
 check_path(SAVE)

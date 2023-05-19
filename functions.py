@@ -125,11 +125,11 @@ def train(model, device, train_loader, optimizer, metric_loss, alpha):
     N_count = 0  # counting total trained sample in one epoch
     epoch_loss = 0.0
     gallery_feat, gallery_label = [], []
-    # start = time()
+    start = time()
     for batch_idx, (image, mat, label) in enumerate(train_loader):
         # distribute data to device
-        # print('io',time() - start)
-        # start = time()
+        print('io',time() - start)
+        start = time()
         image, mat, label = image.to(device), mat.to(device), label.to(device).view(-1, )
 
         N_count += image.size(0)
@@ -138,8 +138,8 @@ def train(model, device, train_loader, optimizer, metric_loss, alpha):
         hidden, output = model(image, mat)  # output has dim = (batch, number of classes)
         # g = d.make_dot(output)
         # g.view()
-        # forward = time() - start
-        # print('for',forward)
+        forward = time() - start
+        print('for',forward)
         loss = F.cross_entropy(output, label) + metric_loss(hidden, label) * alpha
         # loss = F.cross_entropy(output, label)
         # loss = metric_loss(hidden, label)
@@ -147,9 +147,9 @@ def train(model, device, train_loader, optimizer, metric_loss, alpha):
 
         loss.backward()
         optimizer.step()
-        # back = time() -start -forward
-        # print('back',back)
-        # start  = time()
+        back = time() -start -forward
+        print('back',back)
+        start  = time()
     ave_loss = epoch_loss / N_count
     return ave_loss
 
@@ -173,7 +173,9 @@ def validation(model, device, train_loader, test_loader):
         # distribute data to device
         image, mat = image.to(device), mat.to(device)
         with torch.no_grad():
+            start = time()
             hidden, output = model(image, mat)
+            print('time', time() - start)
         prob_feat.append(hidden)
         # prob_feat.append(output)
         prob_label.append(label)

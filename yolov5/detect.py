@@ -174,7 +174,7 @@ def run(
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
-                        # TODO: 如果有两个或多个person，只取最右边的那个（准确率高的那个？）
+                        # 如果有两个或多个person，只取最右边的那个（准确率高的那个？）
                         acc = conf.cpu().numpy().tolist()
                         if names[c] == 'person' and acc > 0.5:
                             xyxy_num = [int(i.cpu().numpy().tolist()) for i in xyxy]
@@ -249,7 +249,7 @@ def run(
 def parse_opt():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'yolov5m.pt', help='model path or triton URL')
-    parser.add_argument('--source', type=str, default=ROOT / 'data/images/10/Video/clap/hb-1-1-1-c01.dat', help='file/dir/URL/glob/screen/0(webcam)')
+    parser.add_argument('--source', type=str, default=ROOT / '../datasets/light/100/train/Video/standup/hb-2-2-4-1-2-su07', help='file/dir/URL/glob/screen/0(webcam)')
     parser.add_argument('--data', type=str, default=ROOT / 'data/coco128.yaml', help='(optional) dataset.yaml path')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='confidence threshold')

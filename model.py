@@ -65,6 +65,7 @@ class CRNN(nn.Module):
 
 
     def forward(self, image, mat):
+        # print(image.shape)
         if self.input_type == 'image' or self.input_type == 'both':
             cnn_emb = self.image_CNN(image)
             rnn_emb = self.image_RNN(cnn_emb)

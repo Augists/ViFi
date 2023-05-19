@@ -47,7 +47,7 @@ working: str = f'light/dark'
 
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # current directory
+ROOT = FILE.parents[0] / '..'  # current directory
 
 DATASETS = ROOT / 'datasets'
 RAW = DATASETS / 'raw'  # ./datasets/raw

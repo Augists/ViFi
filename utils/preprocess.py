@@ -8,7 +8,7 @@ from yolov5 import detect
 
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # current directory
+ROOT = FILE.parents[0] / '..'  # current directory
 
 DATASETS = ROOT / 'datasets'
 YOLO = ROOT / 'yolov5'
@@ -62,7 +62,8 @@ same as dataset_divider.py
 # working: str = f'occlusion/desk'
 # working: str = f'light/10'
 # working: str = f'light/100'
-working: str = f'light/dark'
+# working: str = f'light/dark'
+working: str = f'occlusion/cabinet'
 
 
 def preprocess(TEST=True):

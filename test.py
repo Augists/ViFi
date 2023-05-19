@@ -9,6 +9,7 @@ import random
 import argparse
 import warnings
 import json
+from time import time
 
 warnings.filterwarnings('ignore')
 
@@ -27,10 +28,10 @@ if __name__ == '__main__':
     # parser.add_argument('--test_image_path', type=str, default='./datasets/crop/video_test')  # 路径
     # parser.add_argument('--test_mat_path', type=str, default='./10/Mat_test')
 
-    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/board/train/crop')  # 路径
-    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/board/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/board/test/crop')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/board/test/Mat')
+    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/cabinet/train/crop')  # 路径
+    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/cabinet/train/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/cabinet/test/crop')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/cabinet/test/Mat')
 
     parser.add_argument('--img_x', type=int, default=64)
     parser.add_argument('--img_y', type=int, default=64)
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     parser.add_argument('--n_frames', type=int, default=32)
     parser.add_argument('--num_workers', type=int, default=0)
     parser.add_argument('--input_type', type=str, default='both', choices=['image', 'mat', 'both'])
-    parser.add_argument('--seed', type=int, default=233)
+    parser.add_argument('--seed', type=int, default=3407)
     args = parser.parse_args()
 
     args.load_model_path = f'./best_models/crnn_best_{args.input_type}.pt'
@@ -101,7 +102,9 @@ if __name__ == '__main__':
     # Create model
     model = torch.load(args.load_model_path)
 
+    # start = time()
     gallery_feat, gallery_label, prob_feat, prob_label = validation(model, device, train_loader, test_loader)
+    # print('time', time() - start)
 
     gallery_feat = torch.cat(gallery_feat)
     gallery_label = torch.cat(gallery_label)

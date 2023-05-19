@@ -7,10 +7,11 @@ import shutil
 from pathlib import Path
 
 # working: str = f'occlusion/board'
-working: str = f'light/10'
+# working: str = f'light/10'
+working: str = f'occlusion/cabinet'
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # current directory
+ROOT = FILE.parents[0] / '..'  # current directory
 DATASETS = ROOT / 'datasets'
 
 WORKING = DATASETS / working
