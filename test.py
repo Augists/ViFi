@@ -30,8 +30,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/cabinet/train/crop')  # 路径
     parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/cabinet/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/cabinet/test/crop')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/cabinet/test/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/light/10/test/crop')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/light/10/test/Mat')
 
     parser.add_argument('--img_x', type=int, default=64)
     parser.add_argument('--img_y', type=int, default=64)

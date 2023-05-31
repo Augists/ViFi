@@ -20,7 +20,7 @@ diverse = ['light', 'occlusion']
 for div in diverse:
     DIV = DATASETS / div
     for condition in os.listdir(DIV):
-        if condition == 'cabinet':
+        if condition == 'desk':
             continue
         CONDITION = DIV / condition / 'train'
         CROP = CONDITION / 'crop'

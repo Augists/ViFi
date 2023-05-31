@@ -23,6 +23,7 @@ def check_path(path):
         os.mkdir(path)
 
 if __name__ == '__main__':
+    start_time = time()
     check_path('./best_models')
     check_path('./save_models')
     check_path('./outputs')
@@ -32,14 +33,14 @@ if __name__ == '__main__':
 
     # occlusion / board
     # light / dark
-    parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/desk/train/crop')  # 路径
-    parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/desk/train/Mat')
-    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
-    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
-    # parser.add_argument('--train_image_path', type=str, default='./datasets/collect/crop')  # 路径
-    # parser.add_argument('--train_mat_path', type=str, default='./datasets/collect/Mat')
-    # parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
-    # parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
+    #parser.add_argument('--train_image_path', type=str, default='./datasets/occlusion/desk/train/crop')  # 路径
+    #parser.add_argument('--train_mat_path', type=str, default='./datasets/occlusion/desk/train/Mat')
+    #parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/desk/test/crop')  # 路径
+    #parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/desk/test/Mat')
+    parser.add_argument('--train_image_path', type=str, default='./datasets/collect/crop')  # 路径
+    parser.add_argument('--train_mat_path', type=str, default='./datasets/collect/Mat')
+    parser.add_argument('--test_image_path', type=str, default='./datasets/occlusion/board/test/crop')  # 路径
+    parser.add_argument('--test_mat_path', type=str, default='./datasets/occlusion/board/test/Mat')
 
     parser.add_argument('--save_model_path', type=str, default='./save_models/')
     parser.add_argument('--CNN_fc_hidden1', type=int, default=64)  # ?
@@ -140,7 +141,7 @@ if __name__ == '__main__':
         # model.train()
         start = time()
         train_loss = train(model, device, train_loader, optimizer, metric_loss, args.alpha)
-        end = time() -start
+        end = time() - start
         print('epoch', end)
         print('Epoch:{} train_loss:{:.6f}'.format(epoch + 1, train_loss))
 
@@ -176,3 +177,4 @@ if __name__ == '__main__':
 
     test_acc = test_correct / test_total * 100
     print('test_acc:{:.3f}%'.format(test_acc))
+    print("total time used: ", time() - start_time)
