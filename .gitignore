@@ -5,6 +5,11 @@ best_models
 outputs
 save_models
 __pycache__
-paper
+paper/毕设文档
+paper/毕业答辩
+paper/查重结果
+paper/历史版本
+paper/修改记录
+paper/GBT7714-2005NLang.bst
 
 ~$result.xlsx
